@@ -1,7 +1,9 @@
 import { api } from "./client";
 import type { Task, CreateTaskPayload, UpdateTaskPayload } from "../types/task";
 
-export const getPatients = () =>
+import type { Patient } from "../types/patient"; // ← add this import
+
+export const getPatients = (): Promise<Patient[]> =>  // ← add return type
   api.get("/patients").then((r) => r.data);
 
 export const getTasks = (patientId: string): Promise<Task[]> =>

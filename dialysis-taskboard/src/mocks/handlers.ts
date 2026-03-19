@@ -40,11 +40,9 @@ export const handlers = [
   }),
 
   http.patch("/tasks/:id", async ({ params, request }) => {
-    const body = (await request.json()) as Partial<TaskBody>;
-    tasks = tasks.map(t =>
-      t.id === String(params.id) ? { ...t, ...body } : t
-    );
-    const updated = tasks.find(t => t.id === String(params.id));
-    return HttpResponse.json(updated ?? {});
-  }),
+  const body = await request.json() as any;
+  tasks = tasks.map((t) => t.id === params.id ? { ...t, ...body } : t);
+  const updated = tasks.find((t) => t.id === params.id);
+  return HttpResponse.json(updated); // ← return updated task
+}),
 ];

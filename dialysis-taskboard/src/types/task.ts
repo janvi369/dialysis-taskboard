@@ -15,14 +15,14 @@ export interface Task {
 
 export interface CreateTaskPayload {
   title: string;
-  status?: string;
-  role?: string;
+   status?: TaskStatus;
+  role?: Role; 
   dueDate?: string;
 }
 
 export interface UpdateTaskPayload {
   title?: string;
-  status?: "todo" | "in-progress" | "done";
-  role?: string;
+  status?: "todo" | "in_progress" | "done";
+  role?: Role;
   dueDate?: string;
 }

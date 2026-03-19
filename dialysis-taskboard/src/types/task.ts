@@ -22,7 +22,7 @@ export interface CreateTaskPayload {
 
 export interface UpdateTaskPayload {
   title?: string;
-  status?: string;
+  status?: "todo" | "in-progress" | "done";
   role?: string;
   dueDate?: string;
 }

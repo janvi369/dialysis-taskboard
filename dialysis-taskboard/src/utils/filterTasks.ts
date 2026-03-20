@@ -13,13 +13,14 @@ export function filterTasks(
     if (roles.length > 0 && task.role && !roles.includes(task.role)) return false;
 
     // Time filter
-    if (timeFilter !== "all" && task.dueDate) {
-      const due = task.dueDate;
-      const todayStr = today();
-      if (timeFilter === "overdue" && due >= todayStr) return false;
-      if (timeFilter === "due_today" && due !== todayStr) return false;
-      if (timeFilter === "upcoming" && due <= todayStr) return false;
-    }
+   if (timeFilter !== "all") {
+  if (!task.dueDate) return false;  // ← kick out tasks with no dueDate
+  const due = task.dueDate;
+  const todayStr = today();
+  if (timeFilter === "overdue" && due >= todayStr) return false;
+  if (timeFilter === "due_today" && due !== todayStr) return false;
+  if (timeFilter === "upcoming" && due <= todayStr) return false;
+}
 
     // Search
     if (searchQuery && !task.title.toLowerCase().includes(searchQuery.toLowerCase()))
